@@ -2,13 +2,15 @@
 
 ## Installation
 
-git clone https://github.com/stephan-dowding/IoT-Server.git
-cd IoT-Server
-npm install
+1. git clone https://github.com/stephan-dowding/IoT-Server.git 
+2. cd IoT-Server 
+3. npm install
 
 ## Usage - Run Server
-npm start
-Launch browser and go to localhost:3000
+
+1. npm start 
+2. Launch browser and go to localhost:3000
 
 ## Usage - Run Client
-Launch browser and go to localhost:3000/countdown/5 to start a countdown timer of 5 minutes
+
+1. Launch browser and go to localhost:3000/countdown/5 to start a countdown timer of 5 minutes
