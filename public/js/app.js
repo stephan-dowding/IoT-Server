@@ -2,13 +2,17 @@ var clock;
 var sound = new Audio('../assets/tick.wav')
 
 $(document).ready(function() {
+  $('#bomb').hide();
   clock = $('#clock').FlipClock({
         clockFace: 'MinuteCounter',
         autoStart: false,
             countdown: true,
         callbacks: {
           stop: function() {
-            $('.message').html('Time\'s Up!!!')
+            $('#clock').hide();
+            $('body').css('background-color', 'black');
+            $('#bomb').show();
+            $('#bomb')[0].play();
           },
           interval: function () {
             sound.play();
