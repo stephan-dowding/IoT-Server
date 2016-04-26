@@ -1,24 +1,21 @@
 var express = require('express');
-var bodyParser = require('body-parser');
+var app = express()
+var server = require('http').createServer(app)
+var io = require('socket.io')(server)
 
 var hostname = 'localhost';
 var port = 3000;
 
-var app = express();
-
-
 var router = express.Router();
-
-router.use(bodyParser.json());
 
 router.route('/')
 .all(function(req,res,next) {
       res.writeHead(200, { 'Content-Type': 'text/plain' });
       next();
 })
-
 .get(function(req,res,next){
-        res.end('Hello World!');
+  io.emit('countdown', { message: 'start count down!', duration: 5 });
+  res.end('Hello World!');
 });
 
 router.route('/:minutes')
@@ -26,16 +23,19 @@ router.route('/:minutes')
       res.writeHead(200, { 'Content-Type': 'text/plain' });
       next();
 })
-
 .get(function(req,res,next){
+        io.emit('countdown', { message: 'start count down', duration: parseInt(req.params.minutes, 10) })
         res.end('hello world: minutes:  ' + req.params.minutes +'!');
 })
 ;
-
-app.use('/go',router);
+app.use('/go', router);
 
 app.use(express.static(__dirname + '/public'));
 
-app.listen(port, hostname, function(){
+server.listen(port, hostname, function(){
   console.log(`Server running at http://${hostname}:${port}/`);
 });
+
+io.on('connection', (socket) => {
+
+})
