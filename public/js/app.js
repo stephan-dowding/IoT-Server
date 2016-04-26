@@ -6,16 +6,20 @@ $(document).ready(function() {
   clock = $('#clock').FlipClock({
         clockFace: 'MinuteCounter',
         autoStart: false,
-            countdown: true,
+        countdown: true,
         callbacks: {
           stop: function() {
-            $('#clock').hide();
-            $('body').css('background-color', 'black');
-            $('#bomb').show();
-            $('#bomb')[0].play();
+            if(clock.getTime() == 0){
+
+              $('#clock').hide();
+              $('body').css('background-color', 'black');
+              $('#bomb').show();
+              $('#bomb')[0].play();
+              setTimeout(function(){location.reload();},5000);
+            }
           },
           interval: function () {
-            sound.play();
+              sound.play();
           }
         }
     });
@@ -26,6 +30,6 @@ socket = io.connect();
 socket.on('countdown', function(data) {
     $('.message').html('');
     clock.setTime(data.duration * 60);
-clock.setCountdown(true);
-clock.start();
+    clock.setCountdown(true);
+    clock.start();
 });
