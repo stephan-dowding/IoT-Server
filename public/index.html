@@ -10,6 +10,11 @@
         <div class="container">
             <div id="clock"></div>
 	        <div class="message"></div>
+        	<video id="bomb">
+			  <source src="asset/explosion.mp4" type="video/mp4">
+			</video>
+        </div>
+        <div id="explosion">
         </div>
 	
 
@@ -17,7 +22,7 @@
 		var clock;
 		
 		$(document).ready(function() {
-		
+			$('#bomb').hide();
 
 			clock = $('#clock').FlipClock({
 		        clockFace: 'MinuteCounter',
@@ -25,7 +30,11 @@
                 countdown: true,
 		        callbacks: {
 		        	stop: function() {
-		        		$('.message').html('Time\'s Up!!!')
+		        		//$('.message').html('Time\'s Up!!!');
+		        		$('#clock').hide(); 
+		        		$('body').css('background-color', 'black');
+		        		$('#bomb').show();
+		        		$('#bomb')[0].play(); 
 		        	}
 		        }
 		    });
