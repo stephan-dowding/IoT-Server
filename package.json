@@ -15,8 +15,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run build && node server.js",
-    "build": "browserify public/app.js -o public/bundle.js -t babelify"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC"
