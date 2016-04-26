@@ -22,9 +22,10 @@
 			clock = $('#clock').FlipClock({
 		        clockFace: 'MinuteCounter',
 		        autoStart: false,
+                countdown: true,
 		        callbacks: {
 		        	stop: function() {
-		        		//$('.message').html('The clock has stopped!')
+		        		$('.message').html('Time\'s Up!!!')
 		        	}
 		        }
 		    });
@@ -36,7 +37,7 @@
         socket = io.connect();
         
         socket.on('countdown', function(data) {
-            clock.stop();
+            $('.message').html('');
             clock.setTime(data.duration * 60);
 		    clock.setCountdown(true);
 		    clock.start();
