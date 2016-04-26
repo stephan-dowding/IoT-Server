@@ -5,44 +5,12 @@
         <script src="/js/socket.io-1.4.5.js"></script>
 		<script src="/js/jquery.min.js"></script>
 		<script src="/js/flipclock.js"></script>
+		<script src="/js/app.js"></script>
 	</head>
 	<body>
-        <div class="container">
-            <div id="clock"></div>
-	        <div class="message"></div>
-        </div>
-	
-
-	<script type="text/javascript">
-		var clock;
-		
-		$(document).ready(function() {
-		
-
-			clock = $('#clock').FlipClock({
-		        clockFace: 'MinuteCounter',
-		        autoStart: false,
-                countdown: true,
-		        callbacks: {
-		        	stop: function() {
-		        		$('.message').html('Time\'s Up!!!')
-		        	}
-		        }
-		    });
-				    
-		    
-
-		});
-        
-        socket = io.connect();
-        
-        socket.on('countdown', function(data) {
-            $('.message').html('');
-            clock.setTime(data.duration * 60);
-		    clock.setCountdown(true);
-		    clock.start();
-        });
-	</script>
-	
+    <div class="container">
+      <div id="clock"></div>
+	    <div class="message"></div>
+    </div>
 	</body>
 </html>
