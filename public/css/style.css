@@ -1,9 +1,14 @@
 
 .container {
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
-
-.flip-clock-wrapper {
-	margin: 2em;
-    
+#clock {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
