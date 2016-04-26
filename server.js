@@ -15,7 +15,7 @@ router.route('/countdown')
   })
   .get(function(req,res,next){
     io.emit('countdown', { message: 'start count down!', duration: 5 });
-    res.end('Hello World!');
+    res.end('5 minutes countdown starts now');
   });
 
 router.route('/countdown/:minutes')
@@ -25,7 +25,7 @@ router.route('/countdown/:minutes')
   })
   .get(function(req,res,next){
     io.emit('countdown', { message: 'start count down', duration: parseInt(req.params.minutes, 10) })
-    res.end('hello world: minutes:  ' + req.params.minutes +'!');
+    res.end(req.params.minutes + ' minutes countdown starts now');
   });
 
 app.use(router);
