@@ -1,6 +1,8 @@
 var clock;
 var sound = new Audio('../assets/tick.wav')
 
+var timerActive = false;
+
 $(document).ready(function() {
   $('#bomb').hide();
   clock = $('#clock').FlipClock({
@@ -9,26 +11,28 @@ $(document).ready(function() {
         countdown: true,
         callbacks: {
           stop: function() {
-            if(clock.getTime() == 0){
+            if( timerActive ) {
               handleBoom();
             }
           },
           interval: function () {
+            if( timerActive ) {
               sound.play();
+            }
           }
         }
     });
 });
 
 function handleBoom() {
+  timerActive = true;
   socket.emit('times-up', {});
-  clock.stop();
   $('#clock').hide();
   $('body').css('background-color', 'black');
   $('#bomb').show();
   $('#bomb')[0].play();
   setTimeout(function(){
-    // location.reload();
+    $('.message').html("You have failed this city!");
     $('#clock').show();
     $('body').css('background-color', 'white');
     $('#bomb').hide();
@@ -39,6 +43,7 @@ function handleBoom() {
 socket = io.connect();
 
 socket.on('start', function(data) {
+    timerActive = true;
     $('.message').html("");
     clock.setTime(data.duration);
     clock.setCountdown(true);
@@ -50,6 +55,5 @@ socket.on('message', function(data) {
 });
 
 socket.on('boom', function(data) {
-  handleBoom();
-  $('.message').html("You have failed this city!");
+  clock.stop();
 });

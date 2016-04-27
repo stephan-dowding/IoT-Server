@@ -61,7 +61,9 @@ device.on("message", function(topic, payload) {
   if(topic === 'mozart') {
     console.log("received message: ", topic, payload.toString());
     payload = JSON.parse(payload);
-    if (payload.device == 'symphony-mac') return;
+    if (payload.device == 'symphony-mac') {
+      return;
+    }
 
     switch (payload.event) {
       case "boom":
