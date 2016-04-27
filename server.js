@@ -57,6 +57,12 @@ io.on('connection', (socket) => {
 
 device.subscribe('mozart');
 
+var moduleMap = {
+  "cello-chip": false,
+  "violin-chip": false,
+  "trumpet-edison": false
+};
+
 device.on("message", function(topic, payload) {
   if(topic === 'mozart') {
     console.log("received message: ", topic, payload.toString());
@@ -68,14 +74,30 @@ device.on("message", function(topic, payload) {
     switch (payload.event) {
       case "boom":
       case "start":
+      case "bomb-disarmed":
         io.emit(payload.event, payload);
+        break;
+      case "reset":
+        io.emit(payload.event, payload);
+        moduleMap["cello-chip"] = false;
+        moduleMap["violin-chip"] = false;
+        moduleMap["trumpet-edison"] = false;
+        break;
+      case "disarmed":
+        console.log(payload.device + " Module Disarmed!");
+        io.emit(payload.event, payload);
+        moduleMap[payload.device] = true;
+        checkIfBombDisarmed();
         break;
     }
   }
 });
 
-// device.publish('symphony', JSON.stringify({ event: 'just checking' }));
-
+function checkIfBombDisarmed() {
+  if (moduleMap["cello-chip"] && moduleMap["violin-chip"] && moduleMap["trumpet-edison"]) {
+    device.publish('mozart', JSON.stringify({ event: 'bomb-disarmed' }));
+  }
+}
 
 function exit() {
   process.exit();

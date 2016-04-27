@@ -5,6 +5,7 @@ var timerActive = false;
 
 $(document).ready(function() {
   $('#bomb').hide();
+  $('#win').hide();
   clock = $('#clock').FlipClock({
         clockFace: 'MinuteCounter',
         autoStart: false,
@@ -28,6 +29,7 @@ function handleBoom() {
   timerActive = true;
   socket.emit('times-up', {});
   $('#clock').hide();
+  $('#win').hide();
   $('body').css('background-color', 'black');
   $('#bomb').show();
   $('#bomb')[0].play();
@@ -43,11 +45,16 @@ function handleBoom() {
 socket = io.connect();
 
 socket.on('start', function(data) {
+    $('#win').hide();
     timerActive = true;
     $('.message').html("");
     clock.setTime(data.duration);
     clock.setCountdown(true);
     clock.start();
+});
+
+socket.on('reset', function(data) {
+  location.reload();
 });
 
 socket.on('message', function(data) {
@@ -56,4 +63,11 @@ socket.on('message', function(data) {
 
 socket.on('boom', function(data) {
   clock.stop();
+});
+
+socket.on('bomb-disarmed', function(data) {
+  timerActive = false;
+  $('#clock').hide();
+  $('#bomb').hide();
+  $('#win').show();
 });
