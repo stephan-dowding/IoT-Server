@@ -36,10 +36,6 @@ server.listen(port, hostname, function(){
   console.log(`Server running at http://${hostname}:${port}/`);
 });
 
-io.on('connection', (socket) => {
-
-})
-
 var awsIot = require('aws-iot-device-sdk');
 
 var homeDir = process.env["HOME"];
@@ -53,14 +49,27 @@ var device = awsIot.device({
   reconnectPeriod: 1500
 });
 
+io.on('connection', (socket) => {
+  socket.on('times-up', function() {
+    device.publish('mozart', JSON.stringify({ event: 'boom', device: 'symphony-mac' }));
+  });
+});
+
 device.subscribe('mozart');
+
 device.on("message", function(topic, payload) {
   if(topic === 'mozart') {
     console.log("received message: ", topic, payload.toString());
     payload = JSON.parse(payload);
-    io.emit(payload.event, payload);
-  }
+    if (payload.device == 'symphony-mac') return;
 
+    switch (payload.event) {
+      case "boom":
+      case "start":
+        io.emit(payload.event, payload);
+        break;
+    }
+  }
 });
 
 // device.publish('symphony', JSON.stringify({ event: 'just checking' }));

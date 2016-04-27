@@ -10,12 +10,7 @@ $(document).ready(function() {
         callbacks: {
           stop: function() {
             if(clock.getTime() == 0){
-
-              $('#clock').hide();
-              $('body').css('background-color', 'black');
-              $('#bomb').show();
-              $('#bomb')[0].play();
-              setTimeout(function(){location.reload();},5000);
+              handleBoom();
             }
           },
           interval: function () {
@@ -25,15 +20,26 @@ $(document).ready(function() {
     });
 });
 
+function handleBoom() {
+  socket.emit('times-up', {});
+  clock.stop();
+  $('#clock').hide();
+  $('body').css('background-color', 'black');
+  $('#bomb').show();
+  $('#bomb')[0].play();
+  setTimeout(function(){
+    // location.reload();
+    $('#clock').show();
+    $('body').css('background-color', 'white');
+    $('#bomb').hide();
+    $('#bomb')[0].stop();
+  },5000);
+}
+
 socket = io.connect();
 
-socket.on('countdown', function(data) {
-    clock.setTime(data.duration);
-    clock.setCountdown(true);
-    clock.start();
-});
-
 socket.on('start', function(data) {
+    $('.message').html("");
     clock.setTime(data.duration);
     clock.setCountdown(true);
     clock.start();
@@ -44,5 +50,6 @@ socket.on('message', function(data) {
 });
 
 socket.on('boom', function(data) {
-    $('.message').html("You have failed this city!");
+  handleBoom();
+  $('.message').html("You have failed this city!");
 });
