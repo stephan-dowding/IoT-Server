@@ -42,13 +42,15 @@ io.on('connection', (socket) => {
 
 var awsIot = require('aws-iot-device-sdk');
 
+var homeDir = process.env["HOME"];
+
 var device = awsIot.device({
-  keyPath: '/Users/jigishchawda/.symphony-mac/private.pem.key',
-  certPath: '/Users/jigishchawda/.symphony-mac/certificate.pem.crt',
-  caPath: '/Users/jigishchawda/.symphony-mac/root-CA.pem',
+  keyPath: homeDir+'/.symphony-mac/private.pem.key',
+  certPath: homeDir+'/.symphony-mac/certificate.pem.crt',
+  caPath: homeDir+'/.symphony-mac/root-CA.pem',
   clientId: 'symphony-mac',
   region: 'ap-southeast-1',
-  reconnectPeriod: 5000
+  reconnectPeriod: 1500
 });
 
 device.subscribe('mozart');
