@@ -40,3 +40,7 @@ socket.on('start', function(data) {
     clock.setCountdown(true);
     clock.start();
 });
+
+socket.on('boom', function(data) {
+    $('.message').html("You have failed this city");
+});
