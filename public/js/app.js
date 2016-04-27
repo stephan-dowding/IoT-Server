@@ -33,3 +33,10 @@ socket.on('countdown', function(data) {
     clock.setCountdown(true);
     clock.start();
 });
+
+socket.on('start', function(data) {
+    $('.message').html("You have got " + data.duration * 60 + " minutes");
+    clock.setTime(data.duration * 60);
+    clock.setCountdown(true);
+    clock.start();
+});
