@@ -28,19 +28,21 @@ $(document).ready(function() {
 socket = io.connect();
 
 socket.on('countdown', function(data) {
-    $('.message').html('');
-    clock.setTime(data.duration * 60);
+    clock.setTime(data.duration);
     clock.setCountdown(true);
     clock.start();
 });
 
 socket.on('start', function(data) {
-    $('.message').html("You have got " + data.duration * 60 + " minutes");
-    clock.setTime(data.duration * 60);
+    clock.setTime(data.duration);
     clock.setCountdown(true);
     clock.start();
 });
 
+socket.on('message', function(data) {
+  $('.message').html(data.message);
+});
+
 socket.on('boom', function(data) {
-    $('.message').html("You have failed this city");
+    $('.message').html("You have failed this city!");
 });
