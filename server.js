@@ -4,7 +4,7 @@ var server = require('http').createServer(app)
 var io = require('socket.io')(server)
 
 var hostname = 'localhost';
-var port = 3000;
+var port = process.env.PORT || 3000;
 
 var router = express.Router();
 
@@ -38,14 +38,12 @@ server.listen(port, hostname, function(){
 
 var awsIot = require('aws-iot-device-sdk');
 
-var homeDir = process.env["HOME"];
-
 var device = awsIot.device({
-  keyPath: homeDir+'/.symphony-mac/private.pem.key',
-  certPath: homeDir+'/.symphony-mac/certificate.pem.crt',
-  caPath: homeDir+'/.symphony-mac/root-CA.pem',
-  clientId: 'symphony-mac',
-  region: 'ap-southeast-1',
+  keyPath: process.env.AWS_IOT_KEY_PATH,
+  certPath: process.env.AWS_IOT_CERT_PATH,
+  caPath: process.env.AWS_IOT_CA_PATH,
+  clientId: process.env.AWS_IOT_CLIENT_ID,
+  region: process.env.AWS_REGION,
   reconnectPeriod: 1500
 });
 
