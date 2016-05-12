@@ -3,8 +3,8 @@ function CelloGame() {
   this.numOfIconPerQuestionSet = 6;
 
   this.answer = [0,1,2,3];
-  this.selectedQuestionSet = 0;
-  this.selectedIconsInQuestion = [0,1,2,3];
+  this.questionSet = 0;
+  this.question = [0,1,2,3];
 
   this.resetGame();
 }
@@ -19,8 +19,8 @@ CelloGame.prototype.randomiseAnswer = function() {
 };
 
 CelloGame.prototype.randomiseQuestion = function() {
-  this.selectedQuestionSet = this.selectQuestionSet();
-  this.selectedIconsInQuestion = this.selectIconInQuestionSet();
+  this.questionSet = this.selectQuestionSet();
+  this.question = this.selectIconInQuestionSet();
 };
 
 CelloGame.prototype.selectQuestionSet = function() {
