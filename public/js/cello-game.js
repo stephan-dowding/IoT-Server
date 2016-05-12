@@ -11,14 +11,14 @@ function CelloGame() {
 
 CelloGame.prototype.resetGame = function(){
   this.randomiseAnswer();
-  this.randomiseQuestionSet();
+  this.randomiseQuestion();
 };
 
 CelloGame.prototype.randomiseAnswer = function() {
   this.answer = shuffle(this.answer);
 };
 
-CelloGame.prototype.randomiseQuestionSet = function() {
+CelloGame.prototype.randomiseQuestion = function() {
   this.selectedQuestionSet = this.selectQuestionSet();
   this.selectedIconsInQuestion = this.selectIconInQuestionSet();
 };
