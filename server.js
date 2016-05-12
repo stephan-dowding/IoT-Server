@@ -8,6 +8,23 @@ var port = process.env.PORT || 3000;
 
 var router = express.Router();
 
+var awsIot = require('aws-iot-device-sdk');
+
+var device = awsIot.device({
+  keyPath: process.env.AWS_IOT_KEY_PATH,
+  certPath: process.env.AWS_IOT_CERT_PATH,
+  caPath: process.env.AWS_IOT_CA_PATH,
+  clientId: process.env.AWS_IOT_CLIENT_ID,
+  region: process.env.AWS_REGION,
+  reconnectPeriod: 1500
+});
+
+router.route('/reset')
+.post(function (req, res) {
+  device.publish('mozart', JSON.stringify({ event: 'reset' }));
+  res.send('reset done!');
+});
+
 router.route('/countdown')
   .all(function(req,res,next) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
@@ -34,17 +51,6 @@ app.use('/', express.static(__dirname + '/public'));
 
 server.listen(port, hostname, function(){
   console.log(`Server running at http://${hostname}:${port}/`);
-});
-
-var awsIot = require('aws-iot-device-sdk');
-
-var device = awsIot.device({
-  keyPath: process.env.AWS_IOT_KEY_PATH,
-  certPath: process.env.AWS_IOT_CERT_PATH,
-  caPath: process.env.AWS_IOT_CA_PATH,
-  clientId: process.env.AWS_IOT_CLIENT_ID,
-  region: process.env.AWS_REGION,
-  reconnectPeriod: 1500
 });
 
 io.on('connection', (socket) => {
