@@ -1,17 +1,26 @@
 $(function() {
+  var celloGame = new CelloGame();
+  resetCelloGame();
+
   $("#reset").click(function() {
-    $.post("/reset");
+    var celloGameAnswer = resetCelloGame();
+    $.post("index.html", { answer: {celloGame: celloGameAnswer}});
   });
 
-  var celloGame = new CelloGame();
-  var celloGameAnswer = celloGame.answer;
-  var celloGameQuestion = celloGame.question;
-  var celloGameQuestionSet = celloGame.questionSet;
+  function resetCelloGame(){
+    celloGame.resetGame();
+    var celloGameAnswer = celloGame.answer;
+    var celloGameQuestion = celloGame.question;
+    var celloGameQuestionSet = celloGame.questionSet;
 
-  $('#questionSet', '#celloGame').text(celloGameQuestionSet);
-  $('#buttonOne', '#celloGame').text(celloGameQuestion[celloGameAnswer[0]]);
-  $('#buttonTwo', '#celloGame').text(celloGameQuestion[celloGameAnswer[1]]);
-  $('#buttonThree', '#celloGame').text(celloGameQuestion[celloGameAnswer[2]]);
-  $('#buttonFour', '#celloGame').text(celloGameQuestion[celloGameAnswer[3]]);
+    $('#answer', '#celloGame').text(celloGameAnswer);
+    $('#questionSet', '#celloGame').text(celloGameQuestionSet);
+    $('#buttonOne', '#celloGame').text(celloGameQuestion[celloGameAnswer[0]]);
+    $('#buttonTwo', '#celloGame').text(celloGameQuestion[celloGameAnswer[1]]);
+    $('#buttonThree', '#celloGame').text(celloGameQuestion[celloGameAnswer[2]]);
+    $('#buttonFour', '#celloGame').text(celloGameQuestion[celloGameAnswer[3]]);
+
+    return celloGameAnswer;
+  }
 
 });
