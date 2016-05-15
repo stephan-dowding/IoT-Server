@@ -4,7 +4,7 @@ $(function() {
 
   $("#reset").click(function() {
     var celloGameAnswer = resetCelloGame();
-    $.post("index.html", { answer: {celloGame: celloGameAnswer}});
+    $.post("/reset", { answer: {celloGame: celloGameAnswer}});
   });
 
   function resetCelloGame(){
