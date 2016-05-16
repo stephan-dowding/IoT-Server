@@ -7,7 +7,11 @@ $(function() {
     $.ajax({
       type: 'POST',
       url: '/reset',
-      data: JSON.stringify ({ "answer": { "celloGame": celloGameAnswer}}),
+      data: JSON.stringify ({
+        "answer": {
+          "celloGame": celloGameAnswer
+        }
+      }),
       contentType: "application/json",
       dataType: 'json'
     });

@@ -25,7 +25,13 @@ var device = awsIot.device({
 router.route('/reset')
 .post(function (req, res) {
   console.log(req.body);
-  device.publish('mozart', JSON.stringify({ event: 'reset' }));
+  device.publish('mozart', JSON.stringify({
+    event: 'reset',
+    device : "cello-chip",
+    "data": {
+      "answer": req.body.answer.celloGame
+    }
+  }));
   res.send('reset done!');
 });
 
