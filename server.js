@@ -26,12 +26,17 @@ router.route('/reset')
 .post(function (req, res) {
   console.log(req.body);
   device.publish('mozart', JSON.stringify({
-    event: 'reset',
-    device : "cello-chip",
-    "data": {
-      "answer": req.body.answer.celloGame
+    event: 'config',
+    device: "cello-chip",
+    data: {
+      answer: req.body.answer.celloGame
     }
   }));
+
+  device.publish('mozart', JSON.stringify({
+    event: 'reset'
+  }));
+  
   res.send('reset done!');
 });
 
