@@ -2,6 +2,9 @@ var express = require('express');
 var app = express()
 var server = require('http').createServer(app)
 var io = require('socket.io')(server)
+var bodyParser = require('body-parser')
+
+app.use(bodyParser.json())
 
 var hostname = 'localhost';
 var port = process.env.PORT || 3000;
@@ -21,6 +24,7 @@ var device = awsIot.device({
 
 router.route('/reset')
 .post(function (req, res) {
+  console.log(req.body);
   device.publish('mozart', JSON.stringify({ event: 'reset' }));
   res.send('reset done!');
 });
