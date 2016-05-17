@@ -1,8 +1,13 @@
 $(function() {
   var celloGame = new CelloGame();
-  resetCelloGame();
+
+  resetCelloGameAndSendAnswer();
 
   $("#resetBtn").click(function() {
+    resetCelloGameAndSendAnswer();
+  });
+
+  function resetCelloGameAndSendAnswer(){
     var celloGameAnswer = resetCelloGame();
     $.ajax({
       type: 'POST',
@@ -15,7 +20,7 @@ $(function() {
       contentType: "application/json",
       dataType: 'json'
     });
-  });
+  }
 
   function resetCelloGame(){
     celloGame.resetGame();
@@ -38,5 +43,4 @@ $(function() {
 
     return celloGameAnswer;
   }
-
 });
