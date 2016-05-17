@@ -7,21 +7,29 @@
 	</head>
 	<body>
 		<div id="reset">
-	    <button id="resetBtn">Reset</button>
+			<h2>Follow instruction on the screen to setup a new game.</h2>
+	    <button id="resetBtn">Hit Button to Reset Game</button>
 
-			<div id="celloGame">
-				<h3>Game 2 Answer: <span id="answer"></span></h3>
-				<p>Question set: <span id="questionSet"></span></p>
-				<table>
-					<tr>
-						<td id="buttonOne"></td>
-						<td id="buttonTwo"></td>
-					</tr>
-					<tr>
-						<td id="buttonThree"></td>
-						<td id="buttonFour"></td>
-					</tr>
-				</table>
+			<div id="gameContainer">
+				<div class="game">
+					<h3>Game 1</h3>
+				</div>
+
+				<div class="game" id="celloGame">
+					<h3>Game 2</h3>
+					<p>Answer: <span id="answer"></span></p>
+					<p>Question set: <span id="questionSet"></span></p>
+					<ul>
+							<li id="button1"><img src="" /><p></p></li>
+							<li id="button2"><img src="" /><p></p></li>
+							<li id="button3"><img src="" /><p></p></li>
+							<li id="button4"><img src="" /><p></p></li>
+					</ul>
+				</div>
+
+				<div class="game">
+					<h3>Game 3</h3>
+				</div>
 			</div>
 		</div>
 	</body>

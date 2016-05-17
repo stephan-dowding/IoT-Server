@@ -2,7 +2,7 @@ $(function() {
   var celloGame = new CelloGame();
   resetCelloGame();
 
-  $("#reset").click(function() {
+  $("#resetBtn").click(function() {
     var celloGameAnswer = resetCelloGame();
     $.ajax({
       type: 'POST',
@@ -25,10 +25,16 @@ $(function() {
 
     $('#answer', '#celloGame').text(celloGameAnswer);
     $('#questionSet', '#celloGame').text(celloGameQuestionSet);
-    $('#buttonOne', '#celloGame').text(celloGameQuestion[celloGameAnswer[0]]);
-    $('#buttonTwo', '#celloGame').text(celloGameQuestion[celloGameAnswer[1]]);
-    $('#buttonThree', '#celloGame').text(celloGameQuestion[celloGameAnswer[2]]);
-    $('#buttonFour', '#celloGame').text(celloGameQuestion[celloGameAnswer[3]]);
+
+    for(var i=0; i < celloGameQuestion.length; i++) {
+        $('p', '#celloGame #button' + (i + 1)).text(celloGameQuestion[celloGameAnswer[i]]);
+        $('img', '#celloGame #button' + (i + 1)).attr('src', getImagePathForButton(celloGameQuestion[celloGameAnswer[i]]));
+    }
+
+    function getImagePathForButton(button) {
+      var imageFolder = "assets/cellogame/";
+      return imageFolder + celloGameQuestionSet + "_"  + button + ".jpg";
+    }
 
     return celloGameAnswer;
   }
