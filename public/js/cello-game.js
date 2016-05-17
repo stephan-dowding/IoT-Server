@@ -1,6 +1,6 @@
 function CelloGame() {
-  this.numOfQuestionSet = 4;
-  this.numOfIconPerQuestionSet = 6;
+  this.numOfQuestionSet = 6;
+  this.numOfIconPerQuestionSet = 7;
 
   this.answer = [0,1,2,3];
   this.questionSet = 0;
