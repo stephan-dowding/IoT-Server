@@ -1,0 +1,14 @@
+Blue,Green,Yellow|true,false,true
+Blue,Red,White|true,true,false
+Blue,Red,Blue|true,true,false
+Blue,Red,Yellow|true,true,false
+Blue,Black,Green,Yellow|false,true,true,true
+Blue,Red,Green,Yellow|false,true,true,true
+Black,Yellow,Yellow,Red|true,true,true,false
+Black,Red,Yellow,Green|true,false,true,true
+Red,Yellow,Green,Black,Yellow|false,true,true,true,true
+Red,Yellow,Green,Blue,Red|true,false,true,true,true
+Red,Yellow,Green,Blue,Black|false,true,true,true,true
+Blue,Yellow,White,Red,Black,White|true,true,true,false,true,true
+Blue,Yellow,White,Blue,Black,Green|true,true,true,true,true,false
+Blue,Yellow,White,Red,Black,Green|true,true,true,false,true,true

@@ -1,10 +1,10 @@
 $(function() {
   var celloGame = new CelloGame();
-
-  resetCelloGameAndSendAnswer();
+  var violinGame = new ViolinGame();
 
   $("#resetBtn").click(function() {
     resetCelloGameAndSendAnswer();
+    configureViolinGame();
   });
 
   function resetCelloGameAndSendAnswer(){
@@ -20,6 +20,10 @@ $(function() {
       contentType: "application/json",
       dataType: 'json'
     });
+  }
+
+  function configureViolinGame(){
+    violinGame.resetGame();
   }
 
   function resetCelloGame(){

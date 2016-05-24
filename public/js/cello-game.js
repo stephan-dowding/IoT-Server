@@ -5,8 +5,6 @@ function CelloGame() {
   this.answer = [0,1,2,3];
   this.questionSet = 0;
   this.question = [0,1,2,3];
-
-  this.resetGame();
 }
 
 CelloGame.prototype.resetGame = function(){
@@ -43,4 +41,4 @@ function shuffle(o) {
   return o;
 };
 
-module.exports = CelloGame;
+// module.exports = CelloGame;

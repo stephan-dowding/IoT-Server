@@ -2,6 +2,8 @@
 	<head>
 		<script src="js/jquery.min.js"></script>
 		<script src="js/cello-game.js"></script>
+		<script src="js/violin-game.js"></script>
+		<script src="js/file-reader.js"></script>
 		<script src="js/conductor.js"></script>
 		<link rel="stylesheet" href="css/style.css">
 	</head>
@@ -11,8 +13,10 @@
 	    <button id="resetBtn">Hit Button to Reset Game</button>
 
 			<div id="gameContainer">
-				<div class="game">
+				<div class="game" id="violinGame">
 					<h3>Game 1</h3>
+					<p>Answer: <span id="answer"></span></p>
+					<p>Question set: <span id="questionSet"></span></p>
 				</div>
 
 				<div class="game" id="celloGame">
