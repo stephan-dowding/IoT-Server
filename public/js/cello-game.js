@@ -1,44 +1,46 @@
-function CelloGame() {
-  this.numOfQuestionSet = 6;
-  this.numOfIconPerQuestionSet = 7;
+(function (window) {
+  function shuffle(o) {
+    for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+  };
 
-  this.answer = [0,1,2,3];
-  this.questionSet = 0;
-  this.question = [0,1,2,3];
-}
+  function CelloGame() {
+    this.numOfQuestionSet = 6;
+    this.numOfIconPerQuestionSet = 7;
 
-CelloGame.prototype.resetGame = function(){
-  this.randomiseAnswer();
-  this.randomiseQuestion();
-};
-
-CelloGame.prototype.randomiseAnswer = function() {
-  this.answer = shuffle(this.answer);
-};
-
-CelloGame.prototype.randomiseQuestion = function() {
-  this.questionSet = this.selectQuestionSet();
-  this.question = this.selectIconInQuestionSet();
-};
-
-CelloGame.prototype.selectQuestionSet = function() {
-  return Math.floor(Math.random() * (this.numOfQuestionSet - 1));
-};
-
-CelloGame.prototype.selectIconInQuestionSet = function() {
-  var iconArray = [];
-
-  for(i = 0; i < this.numOfIconPerQuestionSet; i++) {
-    iconArray.push(i);
+    this.answer = [0,1,2,3];
+    this.questionSet = 0;
+    this.question = [0,1,2,3];
   }
 
-  iconArray = shuffle(iconArray);
-  return iconArray.slice(0, this.answer.length).sort();
-};
+  CelloGame.prototype.resetGame = function(){
+    this.randomiseAnswer();
+    this.randomiseQuestion();
+  };
 
-function shuffle(o) {
-  for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-  return o;
-};
+  CelloGame.prototype.randomiseAnswer = function() {
+    this.answer = shuffle(this.answer);
+  };
 
-// module.exports = CelloGame;
+  CelloGame.prototype.randomiseQuestion = function() {
+    this.questionSet = this.selectQuestionSet();
+    this.question = this.selectIconInQuestionSet();
+  };
+
+  CelloGame.prototype.selectQuestionSet = function() {
+    return Math.floor(Math.random() * (this.numOfQuestionSet - 1));
+  };
+
+  CelloGame.prototype.selectIconInQuestionSet = function() {
+    var iconArray = [];
+
+    for(i = 0; i < this.numOfIconPerQuestionSet; i++) {
+      iconArray.push(i);
+    }
+
+    iconArray = shuffle(iconArray);
+    return iconArray.slice(0, this.answer.length).sort();
+  };
+
+  window.CelloGame = CelloGame;
+})(window);
