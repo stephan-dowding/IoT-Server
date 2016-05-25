@@ -1,8 +1,10 @@
-var express = require('express');
-var app = express()
-var server = require('http').createServer(app)
-var io = require('socket.io')(server)
+var express    = require('express')
+var app        = express()
+var path       = require("path")
+var server     = require('http').createServer(app)
+var io         = require('socket.io')(server)
 var bodyParser = require('body-parser')
+var basicAuth = require('basic-auth')
 
 app.use(bodyParser.json())
 
@@ -36,7 +38,7 @@ router.route('/reset')
   device.publish('mozart', JSON.stringify({
     event: 'reset'
   }));
-  
+
   res.send('reset done!');
 });
 
@@ -59,6 +61,24 @@ router.route('/countdown/:minutes')
     io.emit('countdown', { message: 'start count down', duration: parseInt(req.params.minutes, 10) })
     res.end(req.params.minutes + ' minutes countdown starts now');
   });
+
+var auth = function (req, res, next) {
+  function unauthorized(res) {
+    res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
+    return res.sendStatus(401);
+  };
+
+  var user = basicAuth(req);
+  if (user && user.name === 'conductor' && user.pass == 'beethoven') {
+    return next();
+  } else {
+    return unauthorized(res);
+  }
+};
+
+router.get('/conductor(\.html)?', auth, function (req, res) {
+  res.sendFile(path.join(__dirname+'/views/conductor.html'));
+});
 
 app.use(router);
 
