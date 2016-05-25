@@ -24,17 +24,20 @@ var device = awsIot.device({
   reconnectPeriod: 1500
 });
 
-router.route('/reset')
+router.route('/configure')
 .post(function (req, res) {
   console.log(req.body);
   device.publish('mozart', JSON.stringify({
     event: 'config',
-    device: "cello-chip",
-    data: {
-      answer: req.body.answer.celloGame
-    }
+    device: req.body.deviceName,
+    data: req.body.data
   }));
 
+  res.send('config done!');
+});
+
+router.route('/reset')
+.post(function (req, res) {
   device.publish('mozart', JSON.stringify({
     event: 'reset'
   }));

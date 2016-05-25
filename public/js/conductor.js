@@ -1,29 +1,27 @@
 $(function() {
   var celloGame = new CelloGame();
   var violinGame = new ViolinGame();
+  var trumpetGame = new TrumpetGame();
 
   $("#resetBtn").click(function() {
-    resetCelloGameAndSendAnswer();
+    configureCelloGame();
     configureViolinGame();
+    configureTrumpetGame();
+    $.post("/reset");
   });
 
-  function resetCelloGameAndSendAnswer(){
-    var celloGameAnswer = resetCelloGame();
-    $.ajax({
-      type: 'POST',
-      url: '/reset',
-      data: JSON.stringify ({
-        "answer": {
-          "celloGame": celloGameAnswer
-        }
-      }),
-      contentType: "application/json",
-      dataType: 'json'
-    });
+  function configureViolinGame() {
+    var violinGameAnswer = violinGame.resetGame();
   }
 
-  function configureViolinGame(){
-    violinGame.resetGame();
+  function configureTrumpetGame() {
+    var trumpetGameAnswer = trumpetGame.resetGame();
+    sendConfig("trumpet-edison", trumpetGameAnswer);
+  }
+
+  function configureCelloGame(){
+    var celloGameAnswer = resetCelloGame();
+    sendConfig("cello-chip", { answer: celloGameAnswer });
   }
 
   function resetCelloGame(){
@@ -37,14 +35,27 @@ $(function() {
 
     for(var i=0; i < celloGameQuestion.length; i++) {
         $('p', '#celloGame #button' + (i + 1)).text(celloGameQuestion[celloGameAnswer[i]]);
-        $('img', '#celloGame #button' + (i + 1)).attr('src', getImagePathForButton(celloGameQuestion[celloGameAnswer[i]]));
-    }
-
-    function getImagePathForButton(button) {
-      var imageFolder = "assets/cellogame/";
-      return imageFolder + celloGameQuestionSet + "_"  + button + ".jpg";
+        $('img', '#celloGame #button' + (i + 1)).attr('src', getImagePathForButton(celloGameQuestion[celloGameAnswer[i]], celloGameQuestionSet));
     }
 
     return celloGameAnswer;
+  }
+
+  function sendConfig(deviceName, data) {
+    $.ajax({
+      type: 'POST',
+      url: '/configure',
+      data: JSON.stringify({
+        "deviceName": deviceName,
+        "data": data
+      }),
+      contentType: "application/json",
+      dataType: 'json'
+    });
+  }
+
+  function getImagePathForButton(button, questionSet) {
+    var imageFolder = "assets/cellogame/";
+    return imageFolder + questionSet + "_"  + button + ".jpg";
   }
 });
