@@ -12,6 +12,7 @@ $(function() {
 
   function configureViolinGame() {
     var violinGameAnswer = violinGame.resetGame();
+    sendConfig("violin-chip", violinGameAnswer);
   }
 
   function configureTrumpetGame() {

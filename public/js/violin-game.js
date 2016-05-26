@@ -19,6 +19,8 @@
       self.answer = selectedSet[1].split(',');
       self.question = selectedSet[0];
       $('#questionSet', '#violinGame').text(self.question);
+      $('#answer', '#violinGame').text(self.answer);
+      return self.answer;
     });
   };
 
