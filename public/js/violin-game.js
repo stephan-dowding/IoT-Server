@@ -14,7 +14,7 @@
     var fileReader = new FileReader();
     var selectedSet = '';
     var self = this;
-    fileReader.readLine(this.selectAnswerSet()).then(function(data){
+    return fileReader.readLine(this.selectAnswerSet()).then(function(data){
       selectedSet = data.split("|");
       self.answer = selectedSet[1].split(',');
       self.question = selectedSet[0];
