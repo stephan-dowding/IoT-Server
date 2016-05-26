@@ -7,7 +7,7 @@
   }
 
   ViolinGame.prototype.resetGame = function(){
-    this.randomiseAnswer();
+    return this.randomiseAnswer();
   };
 
   ViolinGame.prototype.randomiseAnswer = function() {
