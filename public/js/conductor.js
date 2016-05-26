@@ -11,8 +11,9 @@ $(function() {
   });
 
   function configureViolinGame() {
-    var violinGameAnswer = violinGame.resetGame();
-    sendConfig("violin-chip", violinGameAnswer);
+    violinGame.resetGame().then(function (answer) {
+      sendConfig("violin-chip", answer);
+    });
   }
 
   function configureTrumpetGame() {
