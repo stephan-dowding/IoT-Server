@@ -20,15 +20,15 @@
     { disarmCount: 1, led: colors['cyan'] }
   ];
   var combinations = [
-    { type: 'hold', button_text: 'Abort', button_color: 'Blue', battery_count: 0, lit_indicator: '' },
+    { type: 'hold', button_text: 'Abort', button_color: 'Green', battery_count: 0, lit_indicator: '' },
     { type: 'press', button_text: 'Detonate', button_color: '', battery_count: 2, lit_indicator: '' },
-    { type: 'hold', button_text: '', button_color: 'White', battery_count: 0, lit_indicator: 'CAR' },
     { type: 'press', button_text: '', button_color: '', battery_count: 3, lit_indicator: 'FRK' },
     { type: 'hold', button_text: '', button_color: 'Yellow', battery_count: 0, lit_indicator: '' },
     { type: 'press', button_text: 'Hold', button_color: 'Red', battery_count: 0, lit_indicator: '' },
     { type: 'hold', button_text: 'Abort', button_color: 'Red', battery_count: 0, lit_indicator: '' },
     { type: 'hold', button_text: 'Detonate', button_color: 'Red', battery_count: 0, lit_indicator: '' },
-    { type: 'hold', button_text: 'Hold', button_color: 'Blue', battery_count: 0, lit_indicator: '' },
+    { type: 'hold', button_text: 'Hold', button_color: 'Green', battery_count: 0, lit_indicator: '' },
+    { type: 'hold', button_text: 'Disarm', button_color: 'Red', battery_count: 0, lit_indicator: '' }
   ];
 
   function TrumpetGame() {

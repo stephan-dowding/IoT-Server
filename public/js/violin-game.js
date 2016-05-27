@@ -3,7 +3,7 @@
     this.numOfQuestionSet = 14;
 
     this.question = ["Blue", "Green", "Yellow"];
-    this.answer = ["true", "false", "true"];
+    this.answer = [true, false, true];
   }
 
   ViolinGame.prototype.resetGame = function(){
@@ -16,7 +16,9 @@
     var self = this;
     return fileReader.readLine(this.selectAnswerSet()).then(function(data){
       selectedSet = data.split("|");
-      self.answer = selectedSet[1].split(',');
+      self.answer = selectedSet[1].split(',').map(function (val) {
+         return val === 'true';
+      });
       self.question = selectedSet[0];
       $('#questionSet', '#violinGame').text(self.question);
       $('#answer', '#violinGame').text(self.answer);
