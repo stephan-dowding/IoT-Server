@@ -14,6 +14,14 @@ $(function() {
       $.post("/arm");
   });
 
+  $("#startBtn").click(function() {
+    $.ajax({url: "/start",
+            method: "POST",
+            data: JSON.stringify({duration: parseInt($("#durationTxt").val())}),
+            contentType: "application/json"
+          });
+  });
+
   function configureViolinGame() {
     violinGame.resetGame().then(function (answer) {
       sendConfig("violin-chip", answer);

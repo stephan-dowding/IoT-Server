@@ -54,6 +54,16 @@ router.route('/arm')
   res.send('armed sent!');
 });
 
+router.route('/start')
+.post(function (req, res) {
+  device.publish('mozart', JSON.stringify({
+    event: 'start',
+    duration: req.body.duration
+  }));
+
+  res.send('armed sent!');
+});
+
 router.route('/countdown')
   .all(function(req,res,next) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
