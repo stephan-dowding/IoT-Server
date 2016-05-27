@@ -45,6 +45,15 @@ router.route('/reset')
   res.send('reset done!');
 });
 
+router.route('/arm')
+.post(function (req, res) {
+  device.publish('mozart', JSON.stringify({
+    event: 'arm'
+  }));
+
+  res.send('armed sent!');
+});
+
 router.route('/countdown')
   .all(function(req,res,next) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });

@@ -10,6 +10,10 @@ $(function() {
     $.post("/reset");
   });
 
+  $("#resetBtn").click(function() {
+      $.post("/arm");
+  });
+
   function configureViolinGame() {
     violinGame.resetGame().then(function (answer) {
       sendConfig("violin-chip", answer);
