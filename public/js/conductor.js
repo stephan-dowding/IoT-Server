@@ -10,7 +10,7 @@ $(function() {
     $.post("/reset");
   });
 
-  $("#resetBtn").click(function() {
+  $("#armBtn").click(function() {
       $.post("/arm");
   });
 
