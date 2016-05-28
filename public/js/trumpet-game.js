@@ -10,7 +10,7 @@
     off: { "R": 0, "G": 0, "B": 0 }
   }
 
-  var pressConfig = { disarmCount: 0, led: colors['off'] };
+  var pressConfig = { disarmCount: -1, led: colors['off'] };
   var holdAndReleaseConfig = [
     { disarmCount: 4, led: colors['blue'] },
     { disarmCount: 1, led: colors['white'] },
