@@ -38,7 +38,10 @@ $(function() {
 
   function configureCelloGame(){
     var celloGameAnswer = resetCelloGame();
-    sendConfig("cello-chip", { answer: celloGameAnswer });
+    var answer = celloGameAnswer.sort().map(function (val) {
+      return celloGameAnswer.indexOf(val);
+    });
+    sendConfig("cello-chip", { answer: answer });
   }
 
   function resetCelloGame(){
