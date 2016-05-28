@@ -38,9 +38,10 @@ $(function() {
 
   function configureCelloGame(){
     var celloGameAnswer = resetCelloGame();
-    var answer = celloGameAnswer.sort().map(function (val) {
+    var answer = celloGameAnswer.slice().sort().map(function (val) {
       return celloGameAnswer.indexOf(val);
     });
+    $('#answer', '#celloGame').text(answer);
     sendConfig("cello-chip", { answer: answer });
   }
 
@@ -50,7 +51,6 @@ $(function() {
     var celloGameQuestion = celloGame.question;
     var celloGameQuestionSet = celloGame.questionSet;
 
-    $('#answer', '#celloGame').text(celloGameAnswer);
     $('#questionSet', '#celloGame').text(celloGameQuestionSet);
 
     for(var i=0; i < celloGameQuestion.length; i++) {
