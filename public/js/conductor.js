@@ -3,10 +3,13 @@ $(function() {
   var violinGame = new ViolinGame();
   var trumpetGame = new TrumpetGame();
 
-  $("#resetBtn").click(function() {
+  $("#configBtn").click(function() {
     configureCelloGame();
     configureViolinGame();
     configureTrumpetGame();
+  });
+
+  $("#resetBtn").click(function() {
     $.post("/reset");
   });
 
