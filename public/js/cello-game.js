@@ -14,32 +14,37 @@
   }
 
   CelloGame.prototype.resetGame = function(){
-    this.randomiseAnswer();
-    this.randomiseQuestion();
+    this.questionSet = this.selectRandomQuestionSet();
+
+    var randomIconWithIndex = this.getRandomIconInQuestionSet();
+
+    this.question = randomIconWithIndex.map(function(el){
+      return el[0];
+    });
+
+    this.answer = randomIconWithIndex.sort(function(a, b){
+        return a[0] - b[0];
+    }).map(function(el){
+      return el[1];
+    });
   };
 
-  CelloGame.prototype.randomiseAnswer = function() {
-    this.answer = shuffle(this.answer);
-  };
-
-  CelloGame.prototype.randomiseQuestion = function() {
-    this.questionSet = this.selectQuestionSet();
-    this.question = this.selectIconInQuestionSet();
-  };
-
-  CelloGame.prototype.selectQuestionSet = function() {
+  CelloGame.prototype.selectRandomQuestionSet = function() {
     return Math.floor(Math.random() * (this.numOfQuestionSet - 1));
   };
 
-  CelloGame.prototype.selectIconInQuestionSet = function() {
+  CelloGame.prototype.getRandomIconInQuestionSet = function() {
     var iconArray = [];
 
     for(i = 0; i < this.numOfIconPerQuestionSet; i++) {
       iconArray.push(i);
     }
 
-    iconArray = shuffle(iconArray);
-    return iconArray.slice(0, this.answer.length).sort();
+    iconArray = shuffle(iconArray).slice(0, this.answer.length);
+
+    return iconArray.map(function(el, index){
+      return [el, index];
+    });
   };
 
   window.CelloGame = CelloGame;

@@ -38,11 +38,9 @@ $(function() {
 
   function configureCelloGame(){
     var celloGameAnswer = resetCelloGame();
-    var answer = celloGameAnswer.slice().sort().map(function (val) {
-      return celloGameAnswer.indexOf(val);
-    });
-    $('#answer', '#celloGame').text(answer);
-    sendConfig("cello-chip", { answer: answer });
+
+    $('#answer', '#celloGame').text(celloGameAnswer);
+    sendConfig("cello-chip", { answer: celloGameAnswer });
   }
 
   function resetCelloGame(){
@@ -54,8 +52,8 @@ $(function() {
     $('#questionSet', '#celloGame').text(celloGameQuestionSet);
 
     for(var i=0; i < celloGameQuestion.length; i++) {
-        $('p', '#celloGame #button' + (i + 1)).text(celloGameQuestion[celloGameAnswer[i]]);
-        $('img', '#celloGame #button' + (i + 1)).attr('src', getImagePathForButton(celloGameQuestion[celloGameAnswer[i]], celloGameQuestionSet));
+      $('p', '#celloGame #button' + (i + 1)).text(celloGameQuestion[i]);
+      $('img', '#celloGame #button' + (i + 1)).attr('src', getImagePathForButton(celloGameQuestion[i], celloGameQuestionSet));
     }
 
     return celloGameAnswer;
